@@ -14,6 +14,7 @@ menu = st.sidebar.radio(
         "Leave Location",
         "Token Management",
         "Available Games",
+        "Rules"
         "Admin Panel",
     ]
 )
@@ -542,6 +543,171 @@ elif menu == "Available Games":
             st.markdown("---")
     else:
         st.info("No games found.")
+
+if menu == "Rules":
+    st.header("Rules")
+    
+    st.subheader("Teams")
+    st.markdown("""
+    - **Cassidy and Brian**  
+    - **Sydney and Zach**  
+    - **Nick and Alex**  
+    - **Diya and Brendan**  
+    - **Anwesh and Dane**
+    """)
+    
+    st.subheader("Times")
+    st.markdown("""
+    - **Opening Ceremony:** 12pm  
+      **Location:** 380 River St
+    - **Lunch and games:** 2pm  
+      **Location:** Craft Food Hall
+    - **Arcade Games:** 4pm  
+      **Game Underground**
+    - **Dinner and Pickleball:** 6pm  
+      **Location:** PKL
+    - **Mini Golf:** 9pm  
+      **Location:** Puttshack
+    """)
+    
+    st.subheader("Potential Games")
+    st.markdown("""
+    Multi play means we’ll schedule as many games as we can but everyone might not play the same amount of games, and you get points for each game.  
+    Single Play means everyone will get a chance and there will be a 1st place and 2nd place for the 2 highest scores. For air hockey (singles only), we’ll alternate team members per point.
+    """)
+    
+    st.markdown("""
+    | Game                  | Mode & Points                                                       |
+    |-----------------------|---------------------------------------------------------------------|
+    | Pool                  | Multi Play - 25 per win                                               |
+    | Table Tennis          | Multi Play - 15 per win                                               |
+    | Shuffleboard          | Multi Play - 15 per win                                               |
+    | Foosball              | Multi Play - 15 per win                                               |
+    | Pickleball            | Multi Play - 25 per win                                               |
+    | Air Hockey (Singles)  | Multi Play - 15 per win                                               |
+    | Pinball (Duos)        | Single Play - Duos! 40 for 1st (overall), 20 for 2nd                    |
+    | Arcade Basketball     | Single Play - Duos! 40 for 1st (overall), 20 for 2nd                    |
+    | Beer Pong             | Multi Play - 25                                                       |
+    | Spikeball             | Multi Play - 15 per win                                               |
+    | Kanjam                | Multi Play - 15 per win                                               |
+    | Mini Golf             | Single Play - Individual event, 60 for 1st, 35 for 2nd, 20 for 3rd       |
+    """)
+    
+    st.subheader("Handicaps")
+    st.markdown("Every time you win a multi play game once, you get a handicap from the list below. There are 4 levels per game and you receive level 1 after 1 win and level 2 after 2 wins. They can be cumulative if mentioned.")
+    
+    st.markdown("##### Pool")
+    st.markdown("""
+    - Be on one leg when you play your shot  
+    - 1 + must call pocket before taking shot and it doesn’t count  
+    - Play with non dominant hands  
+    - 1 + 2 + 3  
+    """)
+    
+    st.markdown("##### Table Tennis")
+    st.markdown("""
+    - Can only use one side of your paddle  
+    - Play with non dominant hands  
+    - 1 + 2  
+    - Play with your phones  
+    """)
+    
+    st.markdown("##### Shuffleboard")
+    st.markdown("""
+    - Play with non dominant hands  
+    - Play with 3 pucks instead of 4  
+    - 1 + 2  
+    - Play with 2 pucks  
+    """)
+    
+    st.markdown("##### Foosball")
+    st.markdown("""
+    - Play with 1 hand only  
+    - Goalie is injured  
+    - Play with non-dominant hands only  
+    - 2 + 3  
+    """)
+    
+    st.markdown("##### Spikeball")
+    st.markdown("""
+    - Must spin twice before every serve  
+    - Can never leave the ground with both feet  
+    - Non dominant hands only  
+    - 1 + 2 + 3  
+    """)
+    
+    st.markdown("##### Pickleball")
+    st.markdown("""
+    - Have to start grunting on every shot  
+    - 1 + Opponent gets a second serve  
+    - Play with non dominant hands  
+    - 1 + 2 + 3  
+    """)
+    
+    st.markdown("##### Air Hockey")
+    st.markdown("""
+    - 1 foot per point  
+    - Non dominant hands only  
+    - 1 + 2  
+    - Upside down paddle  
+    """)
+    
+    st.markdown("##### Beer Pong")
+    st.markdown("""
+    - Opponent gets a free rack  
+    - 1 + Throw on one foot  
+    - Play with non dominant hand  
+    - 1 + 2 + 3  
+    """)
+    
+    st.markdown("##### Kanjam")
+    st.markdown("""
+    - Non dominant hand for slammer  
+    - Non dominant hand for thrower  
+    - 1 + 2  
+    - 2 points per 3 pointer  
+    - No handicaps for single play games  
+    """)
+    
+    st.subheader("King and Queen")
+    st.markdown("""
+    - **Brian’s team** starts as king and queen  
+    - Every time you leave a location, the team on top of the scores table becomes King and Queen (a location can have multiple games)  
+    - King and Queen get to make a non-game related rule; breaking this can incur a 1 or 2 point penalty depending on the rule.  
+    - King and Queen play the next game they’re scheduled for with the 1st level handicap of that game.  
+    """)
+    
+    st.subheader("Tokens")
+    st.markdown("##### Duel Token")
+    st.markdown("""
+    - **How to Earn:** A team gets a duel token if they reach overtime in a game 2 times. (Overtime is defined as losing a game by 2 points or less.)  
+    - **Benefit:** Challenge the current kings and queens to any reasonable duel. Powers transfer instantly. The winning team gets 5 points from the other team and makes a new non-game rule.
+    """)
+    
+    st.markdown("##### Peasant Token")
+    st.markdown("""
+    - **How to Earn:** Lose a game without earning a point.  
+    - **Benefit:** Get to add a non-game rule.
+    """)
+    
+    st.markdown("##### Comeback Token")
+    st.markdown("""
+    - **How to Earn:** Lose 3 consecutive games.  
+    - **Benefit:** Your next win earns you double points.
+    """)
+    
+    st.markdown("##### Wizard Token")
+    st.markdown("""
+    - **How to Earn:** Win a game with a level 3 handicap.  
+    - **Benefit:** Immunity from King’s rules for the current King.
+    """)
+    
+    st.subheader("Non Game Rules")
+    st.markdown("""
+    - Can be made by current Kings and Queens.  
+    - Can also be made by a team using a Peasant Token.  
+    - Resets after every location.
+    """)
 
 # ------------------- Admin Panel -------------------
 elif menu == "Admin Panel":
