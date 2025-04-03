@@ -1,5 +1,7 @@
 import json
+import os
 from sqlalchemy import create_engine, text
+
 password = os.environ.get("SUPABASE_PASSWORD")
 DATABASE_URL = f"postgresql://postgres.nbhpzqbsbmlkimvffdin:{password}@aws-0-us-east-1.pooler.supabase.com:6543/postgres"
 
