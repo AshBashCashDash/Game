@@ -14,7 +14,7 @@ menu = st.sidebar.radio(
         "Leave Location",
         "Token Management",
         "Available Games",
-        "Rules"
+        "Rules",
         "Admin Panel",
     ]
 )
