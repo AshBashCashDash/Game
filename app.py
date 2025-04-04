@@ -45,34 +45,35 @@ if menu == "Home":
     if rules:
         for rule in rules:
             st.write(f"**Rule:** {rule['rule']}  —  **Penalty:** {rule['penalty']}")
+            st.subheader("Log a Rule Break")
+        # Allow user to choose which rule was broken
+        if rules:
+            rule_options = {f"{rule['rule']} (Penalty: {rule['penalty']})": rule for rule in rules}
+            selected_rule_desc = st.selectbox("Select the rule that was broken", list(rule_options.keys()))
+            selected_rule = rule_options[selected_rule_desc]
+        else:
+            selected_rule = None
+            # List all teams for selection
+        if teams:
+            team_options = {team["team_name"]: team for team in teams}
+            selected_team_name = st.selectbox("Select the team that broke the rule", list(team_options.keys()))
+            rule_break_team = team_options[selected_team_name]
+        else:
+            rule_break_team = None
+
+        if st.button("Log Rule Break"):
+            if selected_rule is None or rule_break_team is None:
+                st.error("Please select both a rule and a team.")
+            else:
+                penalty = selected_rule["penalty"]
+                current_score = rule_break_team.get("Score") or 0
+                new_score = current_score - penalty
+                update_team_score(rule_break_team["id"], new_score)
+                st.success(f"Logged rule break: {rule_break_team['team_name']}'s score deducted by {penalty} points.")
     else:
         st.info("No non-game rules set.")
 
-    st.subheader("Log a Rule Break")
-    # Allow user to choose which rule was broken
-    if rules:
-        rule_options = {f"{rule['rule']} (Penalty: {rule['penalty']})": rule for rule in rules}
-        selected_rule_desc = st.selectbox("Select the rule that was broken", list(rule_options.keys()))
-        selected_rule = rule_options[selected_rule_desc]
-    else:
-        selected_rule = None
-        # List all teams for selection
-    if teams:
-        team_options = {team["team_name"]: team for team in teams}
-        selected_team_name = st.selectbox("Select the team that broke the rule", list(team_options.keys()))
-        rule_break_team = team_options[selected_team_name]
-    else:
-        rule_break_team = None
 
-    if st.button("Log Rule Break"):
-        if selected_rule is None or rule_break_team is None:
-            st.error("Please select both a rule and a team.")
-        else:
-            penalty = selected_rule["penalty"]
-            current_score = rule_break_team.get("Score") or 0
-            new_score = current_score - penalty
-            update_team_score(rule_break_team["id"], new_score)
-            st.success(f"Logged rule break: {rule_break_team['team_name']}'s score deducted by {penalty} points.")
 
 
     # --- Tokens In Play ---
