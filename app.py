@@ -360,7 +360,7 @@ elif menu == "Submit Scores":
                         team2 = next((t for t in teams_all if t["team_name"] == second_place), None)
                         if team1 and team2:
                             points_first = game_info["points"]
-                            points_second = int(0.4 * game_info["points"])
+                            points_second = int(0.5 * game_info["points"])
                             update_team_score(team1["id"], (team1["Score"] or 0) + points_first)
                             update_team_score(team2["id"], (team2["Score"] or 0) + points_second)
                             update_team_field(team1["id"], "Games_played", (team1["Games_played"] or 0) + 1)
@@ -672,7 +672,6 @@ if menu == "Rules":
     
     st.subheader("King and Queen")
     st.markdown("""
-    - **Brian’s team** starts as king and queen  
     - Every time you leave a location, the team on top of the scores table becomes King and Queen (a location can have multiple games)  
     - King and Queen get to make a non-game related rule; breaking this can incur a 1 or 2 point penalty depending on the rule.  
     - King and Queen play the next game they’re scheduled for with the 1st level handicap of that game.  

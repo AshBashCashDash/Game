@@ -39,7 +39,7 @@ def reset_teams_stats():
             "Games_played" = 0,
             "Lose_Streak" = 0,
             "Overtime_Games_Lost" = 0,
-            "king" = CASE WHEN id = 4 THEN TRUE ELSE FALSE END
+            "king" = CASE WHEN id = 7 THEN TRUE ELSE FALSE END
     ''')
     with engine.begin() as conn:
         conn.execute(query)
