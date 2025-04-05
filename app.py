@@ -373,23 +373,57 @@ elif menu == "Submit Scores":
                             st.error("Error: Could not find selected teams.")
 elif menu == "Submit Half Scores":
     st.header("Submit Half Scores")
-    # Retrieve all teams
+    
+    # Retrieve all teams and available games
     teams = get_all_teams()
-    # Create a list of team names for the dropdowns
     team_names = [team["team_name"] for team in teams]
+    all_games = get_all_games()
+    sport_names = [game["name"] for game in all_games]
     
-    # Dropdown for full team
-    full_team = st.selectbox("Full Team", team_names)
+    # Dropdowns for team selection
+    full_team_name = st.selectbox("Full Team", team_names)
+    half_team1_name = st.selectbox("Half Team 1", team_names)
+    half_team2_name = st.selectbox("Half Team 2", team_names)
     
-    # Dropdown for half teams
-    half_team1 = st.selectbox("Half Team 1", team_names)
-    half_team2 = st.selectbox("Half Team 2", team_names)
+    # Dropdown for sport selection
+    selected_sport = st.selectbox("Select Sport", sport_names)
     
-    st.write("Selected Teams:")
-    st.write("Full Team:", full_team)
-    st.write("Half Team 1:", half_team1)
-    st.write("Half Team 2:", half_team2)
+    # Radio button to choose the winner type
+    winning_side = st.radio("Select Winner", ("Full Team Wins", "Half Teams Win"))
     
+    if st.button("Submit Score"):
+        # Retrieve the game info to get the points for the selected sport.
+        game_info = get_game_by_name(selected_sport)
+        if not game_info:
+            st.error("Game information not found for the selected sport!")
+        else:
+            points = game_info.get("points", 0)
+            if winning_side == "Full Team Wins":
+                # Find the selected full team and award full points.
+                team = next((t for t in teams if t["team_name"] == full_team_name), None)
+                if team:
+                    new_score = (team.get("Score") or 0) + points
+                    update_team_score(team["id"], new_score)
+                    st.success(f"{full_team_name} awarded {points} points!")
+                else:
+                    st.error("Full team not found.")
+            else:
+                # Award half points to each half team.
+                half_points = points / 2  # You may adjust this (e.g., use int() if needed)
+                team1 = next((t for t in teams if t["team_name"] == half_team1_name), None)
+                team2 = next((t for t in teams if t["team_name"] == half_team2_name), None)
+                if team1 and team2:
+                    new_score1 = (team1.get("Score") or 0) + half_points
+                    new_score2 = (team2.get("Score") or 0) + half_points
+                    update_team_score(team1["id"], new_score1)
+                    update_team_score(team2["id"], new_score2)
+                    st.success(f"{half_team1_name} and {half_team2_name} each awarded {half_points} points!")
+                else:
+                    if not team1:
+                        st.error("Half Team 1 not found.")
+                    if not team2:
+                        st.error("Half Team 2 not found.")
+
 elif menu == "Non-Game Rules":
     st.header("Non-Game Rules")
     
