@@ -10,6 +10,7 @@ menu = st.sidebar.radio(
         "Home",
         "Schedule Game",
         "Submit Scores",
+        "Submit Half Scores",
         "Non-Game Rules",
         "Leave Location",
         "Token Management",
@@ -370,7 +371,25 @@ elif menu == "Submit Scores":
                             st.success("Single play scores submitted, points awarded, and record saved to past games!")
                         else:
                             st.error("Error: Could not find selected teams.")
-
+elif menu == "Submit Half Scores":
+    st.header("Submit Half Scores")
+    # Retrieve all teams
+    teams = get_all_teams()
+    # Create a list of team names for the dropdowns
+    team_names = [team["team_name"] for team in teams]
+    
+    # Dropdown for full team
+    full_team = st.selectbox("Full Team", team_names)
+    
+    # Dropdown for half teams
+    half_team1 = st.selectbox("Half Team 1", team_names)
+    half_team2 = st.selectbox("Half Team 2", team_names)
+    
+    st.write("Selected Teams:")
+    st.write("Full Team:", full_team)
+    st.write("Half Team 1:", half_team1)
+    st.write("Half Team 2:", half_team2)
+    
 elif menu == "Non-Game Rules":
     st.header("Non-Game Rules")
     
