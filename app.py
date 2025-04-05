@@ -404,6 +404,14 @@ elif menu == "Submit Half Scores":
                 if team:
                     new_score = (team.get("Score") or 0) + points
                     update_team_score(team["id"], new_score)
+
+                    new_win_streak_team1 = get_team_win_streak(team["id"], selected_sport) + 1
+                    set_team_win_streak(team["id"], selected_sport, new_win_streak_team1)
+                    if new_win_streak_team1 == 3:
+                        tokens = get_team_tokens(team["id"])
+                        new_wizard = tokens.get("Wizard", 0) + 1
+                        update_team_token(team["id"], "Wizard", new_wizard)
+                    
                     st.success(f"{full_team_name} awarded {points} points!")
                 else:
                     st.error("Full team not found.")
@@ -417,6 +425,17 @@ elif menu == "Submit Half Scores":
                     new_score2 = (team2.get("Score") or 0) + half_points
                     update_team_score(team1["id"], new_score1)
                     update_team_score(team2["id"], new_score2)
+
+
+                team = next((t for t in teams if t["team_name"] == full_team_name), None)
+                lose_streak_team2 = team.get("Lose_Streak") or 0
+                if lose_streak_team2 >= 3:
+                    tokens = get_team_tokens(team2["id"])
+                    new_comeback = tokens.get("Comeback", 0) + 1
+                    update_team_token(team2["id"], "Comeback", new_comeback)
+                    update_team_field(team2["id"], "Lose_Streak", 0)
+
+                    
                     st.success(f"{half_team1_name} and {half_team2_name} each awarded {half_points} points!")
                 else:
                     if not team1:
@@ -424,6 +443,7 @@ elif menu == "Submit Half Scores":
                     if not team2:
                         st.error("Half Team 2 not found.")
 
+                
 elif menu == "Non-Game Rules":
     st.header("Non-Game Rules")
     
